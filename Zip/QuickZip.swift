@@ -21,8 +21,8 @@ extension Zip {
      
      - returns: NSURL of the destination folder.
      */
-    public class func quickUnzipFile(path: NSURL) throws -> NSURL {
-        return try quickUnzipFile(path, progress: nil)
+    public class func quickUnzipFile(path: NSURL, intermediateDirPath: String = "", destination: NSSearchPathDirectory = .CachesDirectory) throws -> NSURL {
+        return try quickUnzipFile(path, intermediateDirPath: intermediateDirPath, destination: destination, progress: nil)
     }
     
     /**
@@ -35,7 +35,7 @@ extension Zip {
      
      - returns: NSURL of the destination folder.
      */
-    public class func quickUnzipFile(path: NSURL, destination: NSSearchPathDirectory = .CachesDirectory, progress: ((progress: Double) -> ())?) throws -> NSURL {
+    public class func quickUnzipFile(path: NSURL, intermediateDirPath: String = "", destination: NSSearchPathDirectory = .CachesDirectory, progress: ((progress: Double) -> ())?) throws -> NSURL {
         let fileManager = NSFileManager.defaultManager()
         guard let fileExtension = path.pathExtension, let fileName = path.lastPathComponent else {
             throw ZipError.UnzipFail
@@ -59,8 +59,8 @@ extension Zip {
     
     - returns: NSURL of the destination folder.
     */
-    public class func quickZipFiles(paths: [NSURL], fileName: String) throws -> NSURL {
-        return try quickZipFiles(paths, fileName: fileName, progress: nil)
+    public class func quickZipFiles(paths: [NSURL], fileName: String, destination: NSSearchPathDirectory = .CachesDirectory) throws -> NSURL {
+        return try quickZipFiles(paths, fileName: fileName, destination: destination, progress: nil)
     }
 
     /**
