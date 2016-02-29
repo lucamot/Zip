@@ -41,7 +41,10 @@ extension Zip {
             throw ZipError.UnzipFail
         }
         let directoryName = fileName.stringByReplacingOccurrencesOfString(".\(fileExtension)", withString: "")
-        let documentsUrl = fileManager.URLsForDirectory(destination, inDomains: .UserDomainMask)[0] as NSURL
+        var documentsUrl = fileManager.URLsForDirectory(destination, inDomains: .UserDomainMask)[0] as NSURL
+        if intermediateDirPath.characters.count > 0 {
+            documentsUrl = documentsUrl.URLByAppendingPathComponent(intermediateDirPath)
+        }
         let destinationUrl = documentsUrl.URLByAppendingPathComponent(directoryName, isDirectory: true)
         try self.unzipFile(path, destination: destinationUrl, overwrite: true, password: nil, progress: progress)
         return destinationUrl
