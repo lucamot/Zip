@@ -44,7 +44,7 @@ extension Zip {
         let fileName = path.lastPathComponent
 
         let directoryName = fileName.replacingOccurrences(of: ".\(fileExtension)", with: "")
-        var documentsUrl = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0] as URL
+        var documentsUrl = fileManager.urls(for: destination, in: .userDomainMask)[0] as URL
         if intermediateDirPath.characters.count > 0 {
             documentsUrl = documentsUrl.appendingPathComponent(intermediateDirPath)
         }
